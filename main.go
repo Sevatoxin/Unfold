@@ -109,7 +109,7 @@ func MoveFile(file os.DirEntry) {
 	for _, entry := range entries {
 		if !entry.IsDir() {
 			if file.Name() == entry.Name() {
-				new_path = path.Join(input_path, "WARNING_CHECK_FILE_"+file.Name())
+				new_path = path.Join(input_path, "WARNING_DOUBLED_NAME_"+file.Name())
 			} else {
 				new_path = path.Join(input_path, file.Name())
 			}
