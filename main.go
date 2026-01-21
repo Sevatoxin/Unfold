@@ -61,7 +61,6 @@ func MoveAllFiles() {
 
 		for _, entry := range entries {
 			if !entry.IsDir() {
-				fmt.Println("Moving: ", entry.Name())
 				MoveFile(entry)
 			}
 		}
@@ -109,14 +108,15 @@ func MoveFile(file os.DirEntry) {
 	for _, entry := range entries {
 		if !entry.IsDir() {
 			if file.Name() == entry.Name() {
-				new_path = path.Join(input_path, "WARNING_DOUBLED_NAME_"+file.Name())
+				new_path = path.Join(input_path, file.Name()+"_copy")
 			} else {
 				new_path = path.Join(input_path, file.Name())
 			}
 		}
 	}
-
-	os.Rename(old_path, new_path)
+	fmt.Println("Moving ", old_path, " to ", new_path)
+	move_err := os.Rename(old_path, new_path)
+	check(move_err)
 }
 
 func main() {
